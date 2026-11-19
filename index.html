@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Kids Learn & Play</title>
+<link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+<main class="home">
+  <h1 class="home-title">🌟 Learn & Play 🌟</h1>
+
+  <section class="card-panel">
+    <button class="big-btn" data-section="words">
+      <span class="big-icon">🖼️</span>
+      <span class="big-label">Flashcards</span>
+    </button>
+    <button class="big-btn" data-section="countries">
+      <span class="big-icon">🌍</span>
+      <span class="big-label">Countries</span>
+    </button>
+    <button class="big-btn" data-section="dinosaurs">
+      <span class="big-icon">🦖</span>
+      <span class="big-label">Dinosaurs</span>
+    </button>
+    <button class="big-btn" data-section="game">
+      <span class="big-icon">🎮</span>
+      <span class="big-label">Game</span>
+    </button>
+  </section>
+
+  <section class="lang-panel" id="lang-panel">
+    <h2>Parent settings — Languages shown</h2>
+    <div class="lang-checks" id="lang-checks"></div>
+    <p class="lang-hint">Changes save automatically.</p>
+  </section>
+</main>
+<footer class="footer">Design with 💜 by Tasnim MT</footer>
+
+<script src="js/config.js"></script>
+<script src="js/lang-state.js"></script>
+<script>
+  // Simple parent gate: press-and-hold 2s reveals the settings panel.
+  const panel = document.getElementById('lang-panel');
+  panel.style.display = 'none';
+  const gate = document.createElement('button');
+  gate.className = 'gate-btn';
+  gate.textContent = '🔒 Hold to open parent settings';
+  let timer = null;
+  const startHold = (e) => {
+    e.preventDefault();
+    gate.classList.add('holding');
+    timer = setTimeout(() => {
+      panel.style.display = 'block';
+      gate.style.display = 'none';
+    }, 2000);
+  };
+  const cancelHold = () => { gate.classList.remove('holding'); clearTimeout(timer); };
+  gate.addEventListener('pointerdown', startHold);
+  gate.addEventListener('pointerup', cancelHold);
+  gate.addEventListener('pointerleave', cancelHold);
+  panel.before(gate);
+
+  // Language checkboxes
+  const checks = document.getElementById('lang-checks');
+  function renderLangs() {
+    checks.innerHTML = '';
+    const active = LangState.get();
+    LANGS.forEach((l) => {
+      const label = document.createElement('label');
+      const cb = document.createElement('input');
+      cb.type = 'checkbox';
+      cb.checked = active.includes(l.code);
+      cb.addEventListener('change', () => {
+        const next = [...checks.querySelectorAll('input:checked')].map(() => null);
+        const codes = LANGS.filter((_, i) => checks.querySelectorAll('input')[i].checked).map((x) => x.code);
+        if (codes.length === 0) { cb.checked = true; return; } // keep at least one
+        LangState.set(codes);
+      });
+      label.appendChild(cb);
+      label.appendChild(document.createTextNode(' ' + l.name));
+      checks.appendChild(label);
+    });
+  }
+  renderLangs();
+
+  // Section navigation
+  document.querySelectorAll('.big-btn').forEach((btn) => {
+    btn.addEventListener('click', () => {
+      const s = btn.dataset.section;
+      if (s === 'game') location.href = 'game.html';
+      else location.href = 'flashcards.html?set=' + s;
+    });
+  });
+</script>
+</body>
+</html>
