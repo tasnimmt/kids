@@ -26,7 +26,9 @@
   }
 
   function makeMapSvg(path) {
-    return `<svg class="map-shape" viewBox="0 0 100 85"><path d="${path}" fill="#b7e8ff" stroke="#2b6cb0" stroke-width="1.5"/></svg>`;
+    const holder = document.createElement('div');
+    holder.innerHTML = `<svg class="map-shape" viewBox="0 0 100 85"><path d="${path}" fill="#b7e8ff" stroke="#2b6cb0" stroke-width="1.5"/></svg>`;
+    return holder;
   }
 
   function makeFlag(item) {
