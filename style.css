@@ -1,0 +1,125 @@
+/* Kids Learn & Play — playful, toddler-friendly theme */
+* { box-sizing: border-box; margin: 0; padding: 0; }
+[hidden] { display: none !important; }
+
+body {
+  font-family: 'Comic Sans MS', 'Chalkboard SE', 'Segoe UI', sans-serif;
+  background: linear-gradient(180deg, #ffe9a8 0%, #b7e8ff 100%);
+  min-height: 100vh;
+  color: #333;
+  touch-action: manipulation;
+}
+
+h1 { font-size: 1.6rem; }
+
+/* ---------- Home ---------- */
+.home { max-width: 720px; margin: 0 auto; padding: 24px 16px; text-align: center; }
+.home-title { font-size: 2.4rem; color: #2b6cb0; text-shadow: 2px 2px #fff; margin-bottom: 24px; }
+
+.card-panel { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-bottom: 32px; }
+.big-btn {
+  border: 4px solid #fff; border-radius: 24px; padding: 28px 12px;
+  background: #fff; cursor: pointer; box-shadow: 0 6px 0 rgba(0,0,0,.15);
+  transition: transform .1s;
+}
+.big-btn:active { transform: scale(.95); }
+.big-btn[data-section="words"] { background: #ffdd99; }
+.big-btn[data-section="countries"] { background: #c3f0c9; }
+.big-btn[data-section="dinosaurs"] { background: #e3d0ff; }
+.big-btn[data-section="game"] { background: #ffc3c3; }
+.big-icon { font-size: 3rem; display: block; }
+.big-label { font-size: 1.4rem; font-weight: bold; }
+
+.gate-btn {
+  background: none; border: 2px dashed #999; border-radius: 12px;
+  padding: 10px 18px; font-size: 1rem; cursor: pointer; color: #666;
+}
+.gate-btn.holding { background: #ffe08a; }
+
+.lang-panel {
+  background: #fff; border-radius: 16px; padding: 16px; text-align: left;
+  border: 2px solid #ddd;
+}
+.lang-checks label { display: block; padding: 6px 4px; font-size: 1.1rem; }
+.lang-hint { color: #888; font-size: .85rem; margin-top: 8px; }
+
+/* ---------- Topbar ---------- */
+.topbar {
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 12px 16px; background: #ffffffcc; backdrop-filter: blur(4px);
+}
+.nav-btn {
+  border: none; background: #ffd166; border-radius: 12px; padding: 10px 14px;
+  font-size: 1rem; cursor: pointer; font-family: inherit;
+}
+.score { font-size: 1.3rem; font-weight: bold; }
+
+/* ---------- Flashcards ---------- */
+.flash-main { max-width: 900px; margin: 0 auto; padding: 16px; text-align: center; }
+.cat-picker { display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 14px; }
+.cat-btn {
+  border: 3px solid #fff; border-radius: 18px; background: #fff; padding: 20px 10px;
+  font-size: 1.15rem; font-weight: bold; cursor: pointer; font-family: inherit;
+  box-shadow: 0 5px 0 rgba(0,0,0,.12);
+}
+.cat-btn .cat-icon { display: block; font-size: 2.2rem; }
+.cat-btn:active { transform: scale(.95); }
+
+.card-area { display: flex; align-items: center; justify-content: center; gap: 10px; }
+.arrow-btn {
+  font-size: 2.4rem; border: none; background: #ffd166; border-radius: 50%;
+  width: 72px; height: 72px; cursor: pointer; flex-shrink: 0;
+}
+.arrow-btn:active { transform: scale(.9); }
+
+.flashcard {
+  background: #fff; border-radius: 24px; padding: 14px; width: min(420px, 70vw);
+  box-shadow: 0 10px 24px rgba(0,0,0,.18); cursor: pointer;
+  animation: pop .25s ease;
+}
+@keyframes pop { from { transform: scale(.92); opacity: .4; } to { transform: scale(1); opacity: 1; } }
+.flashcard.bounce { animation: bounce .5s ease; }
+@keyframes bounce {
+  0%,100% { transform: translateY(0); }
+  35% { transform: translateY(-16px) scale(1.04); }
+  65% { transform: translateY(-6px); }
+}
+
+.card-media img { width: 100%; max-height: 300px; object-fit: cover; border-radius: 16px; background: #f4f4f4; }
+.card-media svg.map-shape { width: 100%; height: 220px; }
+.card-media .flag {
+  width: 100%; max-height: 220px; object-fit: contain; border-radius: 12px; border: 1px solid #eee;
+}
+.dino-media { display: flex; gap: 8px; }
+.dino-media img { width: 50%; max-height: 240px; object-fit: cover; border-radius: 12px; background: #f4f4f4; }
+.media-label { font-size: .75rem; color: #999; }
+
+.card-names { margin-top: 12px; }
+.card-names .name-line { font-size: 1.6rem; font-weight: bold; padding: 3px 0; }
+.name-line.ar { direction: rtl; font-size: 1.8rem; font-family: 'Geeza Pro', 'Arabic Typesetting', serif; }
+.name-line.zh { font-size: 1.7rem; }
+.progress { margin-top: 12px; color: #555; font-size: 1rem; }
+
+/* ---------- Game ---------- */
+.game-main { max-width: 640px; margin: 0 auto; padding: 16px; text-align: center; }
+.game-pic img { width: min(360px, 80vw); max-height: 300px; object-fit: cover; border-radius: 20px; border: 6px solid #fff; box-shadow: 0 8px 20px rgba(0,0,0,.15); background: #f4f4f4; }
+.game-pic svg.map-shape { width: min(360px, 80vw); height: 260px; }
+.choices { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; margin: 22px 0 10px; }
+.choice-btn {
+  border: none; background: #fff; border-radius: 16px; padding: 20px 12px;
+  font-size: 1.4rem; font-weight: bold; cursor: pointer; font-family: inherit;
+  box-shadow: 0 5px 0 rgba(0,0,0,.15); min-height: 68px;
+}
+.choice-btn.ar { direction: rtl; }
+.choice-btn:active { transform: scale(.95); }
+.choice-btn.correct { background: #b7f0bd; outline: 4px solid #34a853; }
+.choice-btn.wrong { background: #ffc3c3; opacity: .7; }
+.feedback { font-size: 1.8rem; min-height: 44px; margin: 8px 0; }
+.skip-btn {
+  border: none; background: #7cc5ff; border-radius: 14px; padding: 12px 26px;
+  font-size: 1.2rem; cursor: pointer; font-family: inherit;
+}
+
+.footer {
+  text-align: center; padding: 18px; font-size: 0.9rem; color: #7a6a55;
+}
